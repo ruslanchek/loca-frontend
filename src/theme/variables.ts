@@ -1,0 +1,5 @@
+export const VARIABLES = {
+  FONT_SIZE_SMALL: 12,
+  FONT_SIZE_REGULAR: 14,
+  FONT_SIZE_BIG: 20,
+};
