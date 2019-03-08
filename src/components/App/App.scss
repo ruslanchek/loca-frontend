@@ -25,13 +25,11 @@
 }
 
 .List {
-
-}
-
-.List .Item {
-  padding: 10px 20px;
-  border: 1px solid #eee;
-  background: #eee;
-  border-radius: 6px;
-  margin-bottom: .25em;
+  .Item {
+    padding: 10px 20px;
+    border: 1px solid #eee;
+    background: #eee;
+    border-radius: 6px;
+    margin-bottom: .25em;
+  }
 }
