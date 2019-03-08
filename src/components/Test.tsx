@@ -1,15 +1,15 @@
+import { gql } from 'apollo-boost';
 import React, { Component } from 'react';
-import './App.scss';
-import gql from 'graphql-tag';
 import { ApolloProvider, Mutation, Query, Subscription } from 'react-apollo';
-import { apolloClient } from '../../api/network.layer';
+import { apolloClient } from '../api/network.layer';
 import {
   CommonOrderDirection,
   CreatePhraseInput,
   GetPhrasesInput,
   Phrase,
   PhraseOrderBy,
-} from '../../generated/graphql.schema';
+} from '../generated/graphql.schema';
+import { css } from 'emotion';
 
 const QUERY_GET_PHRASES = gql`
   query(
@@ -61,22 +61,22 @@ interface IState {
   phraseId: string;
 }
 
-class App extends Component<IProps, IState> {
+export class Test extends Component<IProps, IState> {
   state: IState = {
     phraseId: '',
   };
 
   render() {
     return (
-      <div className="App">
+      <div className={appCn}>
         <ApolloProvider client={apolloClient}>
           <Query<{ getPhrases: Phrase[] }, GetPhrasesInput>
             query={QUERY_GET_PHRASES}
             variables={{
-              skip: 10,
+              skip: 0,
               take: 5,
-              orderBy: PhraseOrderBy.phraseId,
-              orderDirection: CommonOrderDirection.ASC,
+              orderBy: PhraseOrderBy.id,
+              orderDirection: CommonOrderDirection.DESC,
             }}
           >
             {({ loading, error, data, refetch }) => {
@@ -161,4 +161,38 @@ class App extends Component<IProps, IState> {
   }
 }
 
-export default App;
+const appCn = css`
+  margin: 40px;
+
+  .Code {
+    font-family: monospace;
+    padding: 20px;
+    background: #eee;
+    border-radius: 6px;
+    margin-bottom: 1em;
+  }
+
+  .Form {
+    border: 1px solid #eee;
+    border-radius: 6px;
+    margin-bottom: 1em;
+    padding: 20px;
+  }
+
+  .Form input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+
+  .List {
+    .Item {
+      padding: 10px 20px;
+      border: 1px solid #eee;
+      background: #eee;
+      border-radius: 6px;
+      margin-bottom: 0.25em;
+    }
+  }
+`;
