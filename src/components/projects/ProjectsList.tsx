@@ -70,6 +70,19 @@ const PROJECTS: IProject[] = [
     baseWords: 133,
     issues: 0,
   },
+
+  {
+    id: 4,
+    avatar: 'https://xsnapp.com/favicons/apple-touch-icon-120x120.png',
+    title: 'Xsnapp.com API',
+    type: EProjectType.Api,
+    status: EProjectStatus.Ready,
+    lastEdit: new Date(Date.now() - 96215),
+    readyness: 40,
+    basePhrases: 49,
+    baseWords: 301,
+    issues: 5,
+  },
 ];
 
 const TABLE_SIZE = [
@@ -111,7 +124,7 @@ export class ProjectsList extends PureComponent<IProps> {
             <TableCol width={TABLE_SIZE[1]}>
               <TableTitle>{project.title}</TableTitle>
               <TableSubtitle>
-                <ProjectType type={EProjectType.WebSite} />
+                <ProjectType type={project.type} />
               </TableSubtitle>
             </TableCol>
 

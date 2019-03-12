@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { css, cx } from 'emotion';
-import { Globe, Book, Smartphone } from 'react-feather';
+import { Globe, Book, Smartphone, Flag, Zap } from 'react-feather';
 
 interface IProps {
   type: EProjectType;
@@ -40,6 +40,14 @@ export class ProjectType extends PureComponent<IProps> {
       case EProjectType.Android:
       case EProjectType.IOs: {
         return <Smartphone size={13} />;
+      }
+
+      case EProjectType.Promo: {
+        return <Flag size={13} />;
+      }
+
+      case EProjectType.Api: {
+        return <Zap size={13} />;
       }
 
       default: {
