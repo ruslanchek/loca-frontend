@@ -187,13 +187,12 @@ const actionArrow = css`
   position: relative;
   top: -2px;
   color: ${COLORS.GRAY_DARK.toString()};
-  transition: transform 0.2s;
 `;
 
 const rowCn = css`
   &:hover {
     .action-arrow {
-      transform: translateX(5px);
+      color: ${COLORS.BLACK.toString()};
     }
   }
 `;

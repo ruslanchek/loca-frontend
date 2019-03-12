@@ -12,7 +12,7 @@ export class TimeDistance extends PureComponent<IProps> {
 
     let str = distanceInWords(value, new Date(), {
       includeSeconds: true,
-      locale: CONFIG.BASE_LOCALE,
+      locale: CONFIG.DEFAULT_LOCALE,
     });
 
     str = str.charAt(0).toUpperCase() + str.slice(1);

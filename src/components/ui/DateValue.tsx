@@ -9,6 +9,6 @@ export class DateValue extends PureComponent<IProps> {
   render() {
     const { value } = this.props;
 
-    return <>{value.toLocaleDateString(CONFIG.BASE_LOCALE)}</>;
+    return <>{value.toLocaleDateString(CONFIG.DEFAULT_LOCALE)}</>;
   }
 }
