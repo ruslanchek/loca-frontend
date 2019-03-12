@@ -13,8 +13,8 @@ import { EProjectStatus, ProjectStatus } from '../ui/ProjectStatus';
 import { Readyness } from '../ui/Readyness';
 import { EProjectType, ProjectType } from '../ui/ProjectType';
 import { TimeValue } from '../ui/TimeValue';
-import { DateValue } from '../ui/DateValue';
 import { NumberValue } from '../ui/NumberValue';
+import {TimeDistance} from "../ui/TimeDistance";
 
 interface IProps {}
 
@@ -38,7 +38,7 @@ const PROJECTS: IProject[] = [
     title: 'Xsnapp.com APP',
     type: EProjectType.WebApplication,
     status: EProjectStatus.Ready,
-    lastEdit: new Date(Date.now() - 8039202),
+    lastEdit: new Date(Date.now() - 12382),
     readyness: 78,
     basePhrases: 1020,
     baseWords: 7406,
@@ -51,7 +51,7 @@ const PROJECTS: IProject[] = [
     title: 'Xsnapp.com Landing',
     type: EProjectType.WebSite,
     status: EProjectStatus.TranslationInProgress,
-    lastEdit: new Date(Date.now() - 2242945),
+    lastEdit: new Date(Date.now() - 22225),
     readyness: 92,
     basePhrases: 207,
     baseWords: 2098,
@@ -64,7 +64,7 @@ const PROJECTS: IProject[] = [
     title: 'Xsnapp.com Emails',
     type: EProjectType.Promo,
     status: EProjectStatus.Archive,
-    lastEdit: new Date(Date.now() - 3237495),
+    lastEdit: new Date(Date.now() - 93215),
     readyness: 100,
     basePhrases: 20,
     baseWords: 133,
@@ -99,7 +99,7 @@ export class ProjectsList extends PureComponent<IProps> {
         </TableHeader>
 
         {PROJECTS.map(project => (
-          <TableRow className={rowCn}>
+          <TableRow className={rowCn} key={project.id.toString()}>
             <TableCol
               width={TABLE_SIZE[0]}
               alignItems="center"
@@ -107,26 +107,30 @@ export class ProjectsList extends PureComponent<IProps> {
             >
               <AvatarProject size={40} src={project.avatar} />
             </TableCol>
+
             <TableCol width={TABLE_SIZE[1]}>
               <TableTitle>{project.title}</TableTitle>
               <TableSubtitle>
                 <ProjectType type={EProjectType.WebSite} />
               </TableSubtitle>
             </TableCol>
+
             <TableCol width={TABLE_SIZE[2]}>
               <TableTitle>
                 <ProjectStatus status={project.status} />
               </TableTitle>
               <TableSubtitle>Available to edit</TableSubtitle>
             </TableCol>
+
             <TableCol width={TABLE_SIZE[3]}>
               <TableTitle>
                 <TimeValue value={project.lastEdit} />
               </TableTitle>
               <TableSubtitle>
-                <DateValue value={project.lastEdit} />
+                <TimeDistance value={project.lastEdit}/>
               </TableSubtitle>
             </TableCol>
+
             <TableCol width={TABLE_SIZE[4]}>
               <TableTitle className={readynessCn}>
                 <i>
@@ -138,6 +142,7 @@ export class ProjectsList extends PureComponent<IProps> {
                 <NumberValue value={project.baseWords} /> issues
               </TableSubtitle>
             </TableCol>
+
             <TableCol width={TABLE_SIZE[5]}>
               <TableTitle>
                 <NumberValue value={project.basePhrases} />
@@ -146,6 +151,7 @@ export class ProjectsList extends PureComponent<IProps> {
                 <NumberValue value={project.baseWords} /> words
               </TableSubtitle>
             </TableCol>
+
             <TableCol
               justifyContent="flex-start"
               alignItems="flex-end"
