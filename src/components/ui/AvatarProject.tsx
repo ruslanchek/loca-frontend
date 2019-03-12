@@ -8,7 +8,7 @@ interface IProps {
   className?: string;
 }
 
-export class Avatar extends PureComponent<IProps> {
+export class AvatarProject extends PureComponent<IProps> {
   public static defaultProps: Partial<IProps> = {
     size: 35,
     className: null,

@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import { ReactComponent as Logo } from '../../img/logo.svg';
 import { css, cx } from 'emotion';
 import { COLORS } from '../../theme/colors';
+import { User, Bell } from 'react-feather';
+import { AvatarUser } from '../ui/AvatarUser';
 
 export class Header extends PureComponent {
   render() {
@@ -10,11 +12,23 @@ export class Header extends PureComponent {
         <Logo className={logo} />
 
         <nav className={nav}>
-          <a className="active" href="#">Projects</a>
+          <a className="active" href="#">
+            Projects
+          </a>
           <a href="#">Languages</a>
           <a href="#">Settings</a>
           <a href="#">Plan</a>
         </nav>
+
+        <div className={user}>
+          <a href="#" className="link">
+            <i />
+            <Bell size={16} />
+          </a>
+          <a href="#" className="link">
+            <AvatarUser src="http://i.pravatar.cc/150?img=65" size={28} />
+          </a>
+        </div>
       </header>
     );
   }
@@ -36,18 +50,49 @@ const logo = css`
 
 const nav = css`
   margin-left: 30px;
-  
-  >a {
+  flex-grow: 1;
+
+  > a {
     margin-right: 25px;
     text-decoration: none;
     color: ${COLORS.GRAY_DARK.toString()};
-    
+
     &:hover {
       color: ${COLORS.BLACK.toString()};
     }
-    
+
     &.active {
       color: ${COLORS.BLUE.toString()};
+    }
+  }
+`;
+
+const user = css`
+  display: flex;
+
+  .link {
+    color: ${COLORS.GRAY_DARK.toString()};
+    margin-left: 12px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+
+    > i {
+      background-color: ${COLORS.RED.toString()};
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      position: absolute;
+      right: 6px;
+      top: 6px;
+    }
+
+    &:hover {
+      color: ${COLORS.GRAY_DARK.darken(0.2).toString()};
     }
   }
 `;

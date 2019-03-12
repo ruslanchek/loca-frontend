@@ -29,7 +29,7 @@ export class TableCol extends PureComponent<IProps> {
 }
 
 const tableColCn = css`
-  padding: 30px 10px;
+  padding: 25px 10px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
