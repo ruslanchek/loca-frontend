@@ -16,6 +16,5 @@ export class Section extends PureComponent<IProps> {
 
 const sectionCn = css`
   border-radius: 6px;
-  background-color: ${COLORS.GRAY_LIGHT.toString()};
-  box-shadow: 0 3px 10px ${COLORS.GRAY_DARK.alpha(0.4).toString()};
+  background-color: ${COLORS.WHITE.toString()};
 `;

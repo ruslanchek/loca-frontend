@@ -59,11 +59,12 @@ export class SelectCard extends PureComponent<IProps, IState> {
 
 const cardCn = css`
   border-radius: 4px;
-  background-color: ${COLORS.WHITE.toString()};
-  box-shadow: 0 3px 8px ${COLORS.GRAY.alpha(0.7).toString()};
-  padding: 12px;
+  padding: 10px;
   font-size: ${VARIABLES.FONT_SIZE_SMALL}px;
   cursor: pointer;
+  border: 1px solid ${COLORS.GRAY.toString()};
+  transition: border-color 0.2s;
+  user-select: none;
 
   .title {
     display: flex;
@@ -100,18 +101,23 @@ const cardCn = css`
     font-weight: 600;
     font-size: ${VARIABLES.FONT_SIZE_REGULAR}px;
     color: ${COLORS.DARK_GRAY.toString()};
+    transition: color 0.2s;
+  }
+
+  &:hover {
+    border-color: ${COLORS.GRAY_DARK.toString()};
   }
 
   &.checked {
     .icon {
-      background-color: ${COLORS.BLUE.alpha(.1).toString()};
-      border-color: transparent;
+      background-color: ${COLORS.BLUE.alpha(0.1).toString()};
+      border-color: ${COLORS.BLUE.alpha(0.25).toString()};
 
       > i {
         transform: scale(0.9999);
       }
     }
-    
+
     .subtitle {
       color: ${COLORS.BLACK.toString()};
     }

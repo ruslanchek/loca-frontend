@@ -19,7 +19,7 @@ export class Title extends PureComponent<IProps> {
 }
 
 const titleCn = css`
-  font-weight: 300;
+  font-weight: 600;
   font-size: ${VARIABLES.FONT_SIZE_BIG}px;
   color: ${COLORS.BLACK.toString()};
 `;
