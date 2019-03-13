@@ -11,14 +11,23 @@ interface IProps {
   className?: string;
 }
 
-export class AvatarProject extends PureComponent<IProps> {
+interface IState {
+  error: boolean;
+}
+
+export class AvatarProject extends PureComponent<IProps, IState> {
   public static defaultProps: Partial<IProps> = {
     size: 35,
     className: null,
   };
 
+  public state = {
+    error: false,
+  };
+
   render() {
     const { size, src } = this.props;
+    const { error } = this.state;
 
     return (
       <div
@@ -31,14 +40,26 @@ export class AvatarProject extends PureComponent<IProps> {
           `,
         ]}
       >
-        {src ? (
-          <img width={size} height={size} css={imgStyles} src={src} />
+        {src && !error ? (
+          <img
+            onErrorCapture={this.onErrorHandler}
+            width={size}
+            height={size}
+            css={imgStyles}
+            src={src}
+          />
         ) : (
           <Folder color={COLORS.BLUE.toString()} size={size / 2} />
         )}
       </div>
     );
   }
+
+  onErrorHandler = () => {
+    this.setState({
+      error: true,
+    });
+  };
 }
 
 const subtitleStyles = css`

@@ -48,7 +48,7 @@ class NotFoundClass extends PureComponent<IProps> {
 export const NotFound = withRouter(NotFoundClass);
 
 const iconStyles = css`
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 `;
 
 const rootStyles = css`

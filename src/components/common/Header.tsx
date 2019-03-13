@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 import { ReactComponent as Logo } from '../../img/logo.svg';
 import { css, jsx } from '@emotion/core';
 import { COLORS } from '../../theme/colors';
-import { User, Bell } from 'react-feather';
+import { Bell } from 'react-feather';
 import { AvatarUser } from '../ui/AvatarUser';
 import { Link } from 'react-router-dom';
 import { PATHS } from '../../paths';
@@ -12,7 +12,7 @@ import { PATHS } from '../../paths';
 export class Header extends PureComponent {
   render() {
     return (
-      <header css={headerStyles}>
+      <header css={rootStyles}>
         <Link to={PATHS.PROJECTS}>
           <Logo css={logo} />
         </Link>
@@ -40,12 +40,18 @@ export class Header extends PureComponent {
   }
 }
 
-const headerStyles = css`
+const rootStyles = css`
   border-bottom: 1px solid ${COLORS.GRAY.toString()};
   padding: 0 30px;
   height: 60px;
   display: flex;
   align-items: center;
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: ${COLORS.WHITE.toString()};
+  z-index: 100;
+  border-radius: 10px 10px 0 0;
 `;
 
 const logo = css`

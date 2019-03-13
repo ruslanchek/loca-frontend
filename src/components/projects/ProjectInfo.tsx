@@ -1,10 +1,15 @@
 /** @jsx jsx */
 
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { css, jsx } from '@emotion/core';
-import { ApolloProvider, Query } from 'react-apollo';
 import { apolloClient } from '../../api/network.layer';
-import { Project } from '../../generated/graphql.schema';
+import {
+  CommonOrderDirection,
+  GetPhrasesInput,
+  Phrase,
+  PhraseOrderBy,
+  Project,
+} from '../../generated/graphql.schema';
 import { gql } from 'apollo-boost';
 import { Loading } from '../ui/Loading';
 import { Breadcrumbs, IBreadcrumb } from '../common/Breadcrumbs';
@@ -13,10 +18,15 @@ import { Title } from '../ui/Title';
 import { AvatarProject } from '../ui/AvatarProject';
 import { NotFound } from '../common/NotFound';
 import { ProjectType } from '../ui/ProjectType';
-import { Button } from '../ui/Button';
 
 interface IProps {
   id: number;
+}
+
+interface IState {
+  project: Project;
+  phrases: Phrase[];
+  loading: boolean;
 }
 
 const BREADCRUMBS: IBreadcrumb[] = [
@@ -30,80 +40,130 @@ const BREADCRUMBS: IBreadcrumb[] = [
   },
 ];
 
-const QUERY_GET_PROJECT = gql`
-  query($id: ID!) {
-    getProject(id: $id) {
-      id
-      title
-      avatar
-      type
-    }
-  }
-`;
+export class ProjectInfo extends Component<IProps, IState> {
+  state: IState = {
+    project: null,
+    phrases: [],
+    loading: false,
+  };
 
-export class ProjectInfo extends PureComponent<IProps> {
+  async componentDidMount() {
+    this.setState({
+      loading: true,
+    });
+
+    const project = await this.getProject(this.props.id);
+    const phrases = await this.getPhrases(this.props.id);
+
+    this.setState({
+      loading: false,
+      project,
+      phrases,
+    });
+  }
+
+  async getProject(id: number): Promise<Project> {
+    const result = await apolloClient.query({
+      query: gql`
+        query($id: ID!) {
+          getProject(id: $id) {
+            id
+            title
+            avatar
+            type
+          }
+        }
+      `,
+      variables: {
+        id,
+      },
+    });
+
+    return result.data.getProject;
+  }
+
+  async getPhrases(projectId: number): Promise<Phrase[]> {
+    const result = await apolloClient.query<
+      { getPhrases: Phrase[] },
+      GetPhrasesInput
+    >({
+      query: gql`
+        query(
+          $skip: Int!
+          $take: Int!
+          $orderBy: PhraseOrderBy!
+          $orderDirection: CommonOrderDirection!
+          $projectId: ID!
+        ) {
+          getPhrases(
+            getPhrasesInput: {
+              projectId: $projectId
+              skip: $skip
+              take: $take
+              orderBy: $orderBy
+              orderDirection: $orderDirection
+            }
+          ) {
+            id
+            phraseId
+            tags
+          }
+        }
+      `,
+      variables: {
+        projectId: projectId.toString(),
+        skip: 0,
+        take: 1000,
+        orderBy: PhraseOrderBy.id,
+        orderDirection: CommonOrderDirection.DESC,
+      },
+    });
+
+    return result.data.getPhrases;
+  }
+
   render() {
-    const { id } = this.props;
+    const { loading, phrases, project } = this.state;
+
+    if (loading) {
+      return (
+        <div css={loadingStyles}>
+          <Loading size={40} />
+        </div>
+      );
+    }
+
+    if (!project) {
+      return (
+        <NotFound
+          title="Project not found"
+          buttonText="Go back to all projects"
+          buttonUrl={PATHS.PROJECTS}
+        />
+      );
+    }
 
     return (
-      <ApolloProvider client={apolloClient}>
-        <Query<{ getProject: Project }, { id: number }>
-          query={QUERY_GET_PROJECT}
-          variables={{
-            id,
-          }}
-        >
-          {result => {
-            if (result.loading) {
-              return (
-                <div css={loadingStyles}>
-                  <Loading size={40} />
-                </div>
-              );
-            }
+      <div>
+        <div css={headingStyles}>
+          <Breadcrumbs breadcrumbs={BREADCRUMBS} />
 
-            if (result.error) {
-              return null;
-            }
+          <div css={titleStyles}>
+            <div css={avatarStyles}>
+              <AvatarProject size={40} src={project.avatar} />
+            </div>
 
-            if (!result.data.getProject) {
-              return (
-                <NotFound
-                  title="Project not found"
-                  buttonText="Go back to all projects"
-                  buttonUrl={PATHS.PROJECTS}
-                />
-              );
-            }
-
-            return (
-              <div>
-                <div css={headingStyles}>
-                  <Breadcrumbs breadcrumbs={BREADCRUMBS} />
-
-                  <div css={titleStyles}>
-                    <div css={avatarStyles}>
-                      <AvatarProject
-                        size={40}
-                        src={result.data.getProject.avatar}
-                      />
-                    </div>
-
-                    <Title>
-                      {result.data.getProject.title}
-                      <div css={projectTypeStyles}>
-                        <ProjectType type={result.data.getProject.type} />
-                      </div>
-                    </Title>
-                  </div>
-                </div>
-
-                {JSON.stringify(result.data.getProject)}
+            <Title>
+              {project.title}
+              <div css={projectTypeStyles}>
+                <ProjectType type={project.type} />
               </div>
-            );
-          }}
-        </Query>
-      </ApolloProvider>
+            </Title>
+          </div>
+        </div>
+
+        {JSON.stringify(phrases)}
+      </div>
     );
   }
 }

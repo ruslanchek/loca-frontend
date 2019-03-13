@@ -15,6 +15,7 @@ import { css, jsx } from '@emotion/core';
 
 const QUERY_GET_PHRASES = gql`
   query(
+    $projectId: ID!
     $skip: Int!
     $take: Int!
     $orderBy: PhraseOrderBy!
@@ -22,6 +23,7 @@ const QUERY_GET_PHRASES = gql`
   ) {
     getPhrases(
       getPhrasesInput: {
+        projectId: $projectId
         skip: $skip
         take: $take
         orderBy: $orderBy
@@ -75,6 +77,7 @@ export class Test extends Component<IProps, IState> {
           <Query<{ getPhrases: Phrase[] }, GetPhrasesInput>
             query={QUERY_GET_PHRASES}
             variables={{
+              projectId: '1',
               skip: 0,
               take: 5,
               orderBy: PhraseOrderBy.id,
