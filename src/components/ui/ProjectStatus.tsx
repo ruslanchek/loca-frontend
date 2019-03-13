@@ -1,12 +1,7 @@
 import React, { PureComponent } from 'react';
 import { css, cx } from 'emotion';
 import { COLORS } from '../../theme/colors';
-
-export enum EProjectStatus {
-  Ready = 'ready',
-  TranslationInProgress = 'translationInProgress',
-  Archive = 'archive',
-}
+import {EProjectStatus} from "../../generated/graphql.schema";
 
 interface IProps {
   status: EProjectStatus;
@@ -47,8 +42,8 @@ const statusCn = css`
   position: relative;
 
   &:before {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     content: '';
     display: block;
@@ -62,7 +57,8 @@ const statusCn = css`
     content: '';
     display: block;
     position: absolute;
-    left: 4px;
+    left: 5px;
+    top: 5.5px;
   }
 `;
 

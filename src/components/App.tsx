@@ -6,10 +6,12 @@ import { VARIABLES } from '../theme/variables';
 import { Title } from './ui/Title';
 import { Header } from './common/Header';
 import { ProjectsList } from './projects/ProjectsList';
+import { Button, EButtonTheme } from './ui/Button';
+import { Plus } from 'react-feather';
 
 injectGlobal`
 	body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: ${VARIABLES.FONT_FAMILY};
     background-color: ${COLORS.GRAY.toString()};
     margin: 0;
     color: ${COLORS.BLACK.toString()};
@@ -29,7 +31,12 @@ export class App extends PureComponent<IProps, IState> {
           <Header />
 
           <div className={contentCn}>
-            <Title>Projects</Title>
+            <div className={titleCn}>
+              <Title>Projects</Title>
+              <Button theme={EButtonTheme.Green}>
+                New project
+              </Button>
+            </div>
 
             <ProjectsList />
           </div>
@@ -38,6 +45,12 @@ export class App extends PureComponent<IProps, IState> {
     );
   }
 }
+
+const titleCn = css`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 const sectionCn = css`
   .cards {

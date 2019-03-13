@@ -9,12 +9,26 @@ import { AvatarProject } from '../ui/AvatarProject';
 import { TableTitle } from '../table/TableTitle';
 import { TableSubtitle } from '../table/TableSubtitle';
 import { ChevronRight } from 'react-feather';
-import { EProjectStatus, ProjectStatus } from '../ui/ProjectStatus';
+import { ProjectStatus } from '../ui/ProjectStatus';
 import { Readyness } from '../ui/Readyness';
-import { EProjectType, ProjectType } from '../ui/ProjectType';
+import { ProjectType } from '../ui/ProjectType';
 import { TimeValue } from '../ui/TimeValue';
 import { NumberValue } from '../ui/NumberValue';
-import {TimeDistance} from "../ui/TimeDistance";
+import { TimeDistance } from '../ui/TimeDistance';
+import { gql } from 'apollo-boost';
+import {
+  CommonOrderDirection,
+  EProjectStatus,
+  EProjectType,
+  GetPhrasesInput,
+  GetProjectsInput,
+  Phrase,
+  PhraseOrderBy,
+  Project,
+  ProjectOrderBy,
+} from '../../generated/graphql.schema';
+import { apolloClient } from '../../api/network.layer';
+import { ApolloProvider, Query } from 'react-apollo';
 
 interface IProps {}
 
@@ -31,59 +45,34 @@ interface IProject {
   issues: number;
 }
 
-const PROJECTS: IProject[] = [
-  {
-    id: 1,
-    avatar: 'https://xsnapp.com/favicons/apple-touch-icon-120x120.png',
-    title: 'Xsnapp.com APP',
-    type: EProjectType.WebApplication,
-    status: EProjectStatus.Ready,
-    lastEdit: new Date(Date.now() - 12382),
-    readyness: 78,
-    basePhrases: 1020,
-    baseWords: 7406,
-    issues: 21,
-  },
-
-  {
-    id: 2,
-    avatar: 'https://xsnapp.com/favicons/apple-touch-icon-120x120.png',
-    title: 'Xsnapp.com Landing',
-    type: EProjectType.WebSite,
-    status: EProjectStatus.TranslationInProgress,
-    lastEdit: new Date(Date.now() - 22225),
-    readyness: 92,
-    basePhrases: 207,
-    baseWords: 2098,
-    issues: 3,
-  },
-
-  {
-    id: 3,
-    avatar: 'https://xsnapp.com/favicons/apple-touch-icon-120x120.png',
-    title: 'Xsnapp.com Emails',
-    type: EProjectType.Promo,
-    status: EProjectStatus.Archive,
-    lastEdit: new Date(Date.now() - 93215),
-    readyness: 100,
-    basePhrases: 20,
-    baseWords: 133,
-    issues: 0,
-  },
-
-  {
-    id: 4,
-    avatar: 'https://xsnapp.com/favicons/apple-touch-icon-120x120.png',
-    title: 'Xsnapp.com API',
-    type: EProjectType.Api,
-    status: EProjectStatus.Ready,
-    lastEdit: new Date(Date.now() - 96215),
-    readyness: 40,
-    basePhrases: 49,
-    baseWords: 301,
-    issues: 5,
-  },
-];
+const QUERY_GET_PROJECTS = gql`
+  query(
+    $skip: Int!
+    $take: Int!
+    $orderBy: ProjectOrderBy!
+    $orderDirection: CommonOrderDirection!
+  ) {
+    getProjects(
+      getProjectsInput: {
+        skip: $skip
+        take: $take
+        orderBy: $orderBy
+        orderDirection: $orderDirection
+      }
+    ) {
+      id
+      lastEdit
+      status
+      type
+      issues
+      readyness
+      baseWords
+      basePhrases
+      description
+      title
+    }
+  }
+`;
 
 const TABLE_SIZE = [
   '60px',
@@ -111,71 +100,97 @@ export class ProjectsList extends PureComponent<IProps> {
           <TableHeaderCol width={TABLE_SIZE[6]} />
         </TableHeader>
 
-        {PROJECTS.map(project => (
-          <TableRow className={rowCn} key={project.id.toString()}>
-            <TableCol
-              width={TABLE_SIZE[0]}
-              alignItems="center"
-              justifyContent="center"
-            >
-              <AvatarProject size={40} src={project.avatar} />
-            </TableCol>
+        <ApolloProvider client={apolloClient}>
+          <Query<{ getProjects: Project[] }, GetProjectsInput>
+            query={QUERY_GET_PROJECTS}
+            variables={{
+              skip: 0,
+              take: 10,
+              orderBy: ProjectOrderBy.id,
+              orderDirection: CommonOrderDirection.DESC,
+            }}
+          >
+            {({ loading, error, data, refetch }) => {
+              if (loading) {
+                return 'Loading...';
+              }
 
-            <TableCol width={TABLE_SIZE[1]}>
-              <TableTitle>{project.title}</TableTitle>
-              <TableSubtitle>
-                <ProjectType type={project.type} />
-              </TableSubtitle>
-            </TableCol>
+              if (error) {
+                return `Error! ${error.message}`;
+              }
 
-            <TableCol width={TABLE_SIZE[2]}>
-              <TableTitle>
-                <ProjectStatus status={project.status} />
-              </TableTitle>
-              <TableSubtitle>Available to edit</TableSubtitle>
-            </TableCol>
+              return (
+                <>
+                  {data.getProjects.map(project => (
+                    <TableRow className={rowCn} key={project.id.toString()}>
+                      <TableCol
+                        width={TABLE_SIZE[0]}
+                        alignItems="center"
+                        justifyContent="center"
+                      >
+                        <AvatarProject size={40} src={null} />
+                      </TableCol>
 
-            <TableCol width={TABLE_SIZE[3]}>
-              <TableTitle>
-                <TimeValue value={project.lastEdit} />
-              </TableTitle>
-              <TableSubtitle>
-                <TimeDistance value={project.lastEdit}/>
-              </TableSubtitle>
-            </TableCol>
+                      <TableCol width={TABLE_SIZE[1]}>
+                        <TableTitle>{project.title}</TableTitle>
+                        <TableSubtitle>
+                          <ProjectType type={project.type} />
+                        </TableSubtitle>
+                      </TableCol>
 
-            <TableCol width={TABLE_SIZE[4]}>
-              <TableTitle className={readynessCn}>
-                <i>
-                  <Readyness size={11} percent={project.readyness} />
-                </i>
-                <span>{project.readyness}%</span>
-              </TableTitle>
-              <TableSubtitle>
-                <NumberValue value={project.baseWords} /> issues
-              </TableSubtitle>
-            </TableCol>
+                      <TableCol width={TABLE_SIZE[2]}>
+                        <TableTitle>
+                          <ProjectStatus status={project.status} />
+                        </TableTitle>
+                        <TableSubtitle>Available to edit</TableSubtitle>
+                      </TableCol>
 
-            <TableCol width={TABLE_SIZE[5]}>
-              <TableTitle>
-                <NumberValue value={project.basePhrases} />
-              </TableTitle>
-              <TableSubtitle>
-                <NumberValue value={project.baseWords} /> words
-              </TableSubtitle>
-            </TableCol>
+                      <TableCol width={TABLE_SIZE[3]}>
+                        <TableTitle>
+                          <TimeValue value={new Date(project.lastEdit)} />
+                        </TableTitle>
+                        <TableSubtitle>
+                          <TimeDistance value={new Date(project.lastEdit)} />
+                        </TableSubtitle>
+                      </TableCol>
 
-            <TableCol
-              justifyContent="flex-start"
-              alignItems="flex-end"
-              width={TABLE_SIZE[6]}
-            >
-              <span className={cx(actionArrow, 'action-arrow')}>
-                <ChevronRight />
-              </span>
-            </TableCol>
-          </TableRow>
-        ))}
+                      <TableCol width={TABLE_SIZE[4]}>
+                        <TableTitle className={readynessCn}>
+                          <i>
+                            <Readyness size={11} percent={project.readyness} />
+                          </i>
+                          <span>{project.readyness}%</span>
+                        </TableTitle>
+                        <TableSubtitle>
+                          <NumberValue value={project.issues} /> issues
+                        </TableSubtitle>
+                      </TableCol>
+
+                      <TableCol width={TABLE_SIZE[5]}>
+                        <TableTitle>
+                          <NumberValue value={project.basePhrases} />
+                        </TableTitle>
+                        <TableSubtitle>
+                          <NumberValue value={project.baseWords} /> words
+                        </TableSubtitle>
+                      </TableCol>
+
+                      <TableCol
+                        justifyContent="flex-start"
+                        alignItems="flex-end"
+                        width={TABLE_SIZE[6]}
+                      >
+                        <span className={cx(actionArrow, 'action-arrow')}>
+                          <ChevronRight />
+                        </span>
+                      </TableCol>
+                    </TableRow>
+                  ))}
+                </>
+              );
+            }}
+          </Query>
+        </ApolloProvider>
       </div>
     );
   }

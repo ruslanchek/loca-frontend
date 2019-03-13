@@ -1,21 +1,11 @@
 import React, { PureComponent } from 'react';
 import { css, cx } from 'emotion';
 import { Globe, Book, Smartphone, Flag, Zap } from 'react-feather';
+import {EProjectType} from "../../generated/graphql.schema";
 
 interface IProps {
   type: EProjectType;
   className?: string;
-}
-
-export enum EProjectType {
-  WebApplication,
-  IOs,
-  Android,
-  DesktopApplication,
-  Promo,
-  WebSite,
-  Api,
-  Other,
 }
 
 export class ProjectType extends PureComponent<IProps> {
