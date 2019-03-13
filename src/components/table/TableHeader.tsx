@@ -11,11 +11,11 @@ export class TableHeader extends PureComponent<IProps> {
   render() {
     const { children } = this.props;
 
-    return <div css={tableHeaderCn}>{children}</div>;
+    return <div css={tableHeaderStyles}>{children}</div>;
   }
 }
 
-const tableHeaderCn = css`
+const tableHeaderStyles = css`
   border-radius: 6px;
   background-color: ${COLORS.GRAY_LIGHT.toString()};
   display: flex;

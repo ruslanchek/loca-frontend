@@ -9,7 +9,6 @@ interface IProps {
   theme: EButtonTheme;
   type?: 'submit' | 'button';
   onClick: () => void;
-  className?: string;
 }
 
 export enum EButtonTheme {
@@ -20,17 +19,16 @@ export class Button extends PureComponent<IProps> {
   public static defaultProps: Partial<IProps> = {
     onClick: () => {},
     type: 'button',
-    className: '',
   };
 
   render() {
-    const { className, theme, type, onClick, children } = this.props;
+    const { theme, type, onClick, children } = this.props;
 
     return (
       <button
         onClick={() => onClick()}
         type={type}
-        css={[buttonCn, themes[theme], className]}
+        css={[buttonStyles, themes[theme]]}
       >
         {children}
       </button>
@@ -38,7 +36,7 @@ export class Button extends PureComponent<IProps> {
   }
 }
 
-const buttonCn = css`
+const buttonStyles = css`
   border-radius: 6px;
   border: none;
   font-weight: 600;

@@ -18,11 +18,11 @@ export class IconBadge extends PureComponent<IProps> {
   };
 
   render() {
-    const { icon, size, children } = this.props;
+    const { icon, size } = this.props;
     return (
       <div
         css={[
-          subtitleCn,
+          subtitleStyles,
           css`
             width: ${size}px;
             min-width: ${size}px;
@@ -39,7 +39,7 @@ export class IconBadge extends PureComponent<IProps> {
   }
 }
 
-const subtitleCn = css`
+const subtitleStyles = css`
   font-size: ${VARIABLES.FONT_SIZE_REGULAR}px;
   color: ${COLORS.DARK_GRAY.toString()};
   background-color: ${COLORS.BLUE.alpha(0.1).toString()};

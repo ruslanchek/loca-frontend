@@ -22,7 +22,7 @@ export class TableCol extends PureComponent<IProps> {
     return (
       <div
         css={[
-          tableColCn,
+          tableColStyles,
           css`
             width: ${width};
             min-width: ${width};
@@ -37,7 +37,7 @@ export class TableCol extends PureComponent<IProps> {
   }
 }
 
-const tableColCn = css`
+const tableColStyles = css`
   padding: 25px 10px;
   display: flex;
   flex-direction: column;

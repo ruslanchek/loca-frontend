@@ -13,14 +13,14 @@ export class TableRow extends PureComponent<IProps> {
     const { children, onClick } = this.props;
 
     return (
-      <div onClick={() => onClick()} css={tableRowCn}>
+      <div onClick={() => onClick()} css={tableRowStyles}>
         {children}
       </div>
     );
   }
 }
 
-const tableRowCn = css`
+const tableRowStyles = css`
   display: flex;
   border-bottom: 1px solid ${COLORS.GRAY.toString()};
   padding: 0 10px;
@@ -34,5 +34,9 @@ const tableRowCn = css`
       ${COLORS.GRAY_LIGHT.alpha(0).toString()},
       ${COLORS.GRAY_LIGHT.alpha(1).toString()}
     );
+
+    .action-arrow {
+      color: ${COLORS.BLACK.toString()};
+    }
   }
 `;

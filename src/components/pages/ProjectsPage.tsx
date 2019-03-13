@@ -9,9 +9,11 @@ import { ProjectsList } from '../projects/ProjectsList';
 
 export class ProjectsPage extends PureComponent<RouteComponentProps> {
   render() {
+    console.log(this.props.match)
+
     return (
-      <div css={contentCn}>
-        <div css={titleCn}>
+      <div css={contentStyles}>
+        <div css={titleStyles}>
           <Title>Projects</Title>
           <Button theme={EButtonTheme.Green}>New project</Button>
         </div>
@@ -22,12 +24,12 @@ export class ProjectsPage extends PureComponent<RouteComponentProps> {
   }
 }
 
-const titleCn = css`
+const titleStyles = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
-const contentCn = css`
+const contentStyles = css`
   padding: 30px;
 `;

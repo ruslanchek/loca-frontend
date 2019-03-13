@@ -23,7 +23,7 @@ export class AvatarProject extends PureComponent<IProps> {
     return (
       <div
         css={[
-          subtitleCn,
+          subtitleStyles,
           css`
             width: ${size}px;
             min-width: ${size}px;
@@ -32,7 +32,7 @@ export class AvatarProject extends PureComponent<IProps> {
         ]}
       >
         {src ? (
-          <img width={size} height={size} css={imgCn} src={src} />
+          <img width={size} height={size} css={imgStyles} src={src} />
         ) : (
           <Folder color={COLORS.BLUE.toString()} size={size / 2} />
         )}
@@ -41,7 +41,7 @@ export class AvatarProject extends PureComponent<IProps> {
   }
 }
 
-const subtitleCn = css`
+const subtitleStyles = css`
   background-color: ${COLORS.BLUE.alpha(0.1).toString()};
   border-radius: 50%;
   display: flex;
@@ -51,6 +51,6 @@ const subtitleCn = css`
   position: relative;
 `;
 
-const imgCn = css`
+const imgStyles = css`
   border-radius: 50%;
 `;

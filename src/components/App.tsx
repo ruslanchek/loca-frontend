@@ -1,13 +1,15 @@
+/** @jsx jsx */
+
 import React, { ComponentClass, PureComponent } from 'react';
-import { css, Global } from '@emotion/core';
+import { css, jsx, Global } from '@emotion/core';
 import { COLORS } from '../theme/colors';
 import { Section } from './ui/Section';
 import { VARIABLES } from '../theme/variables';
 import { Header } from './common/Header';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { PATHS } from '../paths';
-import { ProjectsPage } from './pages/ProjectsPage';
 import { ProjectPage } from './pages/ProjectPage';
+import { ProjectsPage } from './pages/ProjectsPage';
 
 const body = document.body;
 let timer = null;
@@ -31,41 +33,42 @@ window.addEventListener(
 interface IRoute {
   component: ComponentClass;
   path: string;
+  exact: boolean;
 }
 
 const ROUTES: IRoute[] = [
   {
     path: PATHS.PROJECTS,
     component: ProjectsPage,
+    exact: true,
   },
 
   {
     path: PATHS.PROJECT,
     component: ProjectPage,
+    exact: true,
   },
 ];
 
 export class App extends PureComponent {
   render() {
     return (
-      <main css={appCn}>
-        <Section css={sectionCn}>
-          <Header />
-
+      <main css={appStyles}>
+        <Section css={sectionStyles}>
           <BrowserRouter>
-            <Switch>
-              {ROUTES.map(route => (
-                <Route
-                  key={route.path}
-                  path={route.path}
-                  component={route.component}
-                />
-              ))}
+            <React.Fragment>
+              <Header />
 
-              <Route path="*">
-                <Redirect to={PATHS.NOT_FOUND} />
-              </Route>
-            </Switch>
+              <Switch>
+                {ROUTES.map(route => (
+                  <Route key={route.path} {...route} />
+                ))}
+
+                <Route path="*">
+                  <Redirect to={PATHS.NOT_FOUND} />
+                </Route>
+              </Switch>
+            </React.Fragment>
           </BrowserRouter>
         </Section>
 
@@ -89,7 +92,7 @@ const globalCss = css`
   }
 `;
 
-const sectionCn = css`
+const sectionStyles = css`
   .cards {
     margin-top: 15px;
     display: flex;
@@ -100,6 +103,6 @@ const sectionCn = css`
   }
 `;
 
-const appCn = css`
+const appStyles = css`
   padding: 30px;
 `;

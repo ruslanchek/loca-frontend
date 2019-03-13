@@ -3,19 +3,16 @@
 import React, { PureComponent } from 'react';
 import { css, jsx } from '@emotion/core';
 import { Globe, Book, Smartphone, Flag, Zap } from 'react-feather';
-import {EProjectType} from "../../generated/graphql.schema";
+import { EProjectType } from '../../generated/graphql.schema';
 
 interface IProps {
   type: EProjectType;
-  className?: string;
 }
 
 export class ProjectType extends PureComponent<IProps> {
   render() {
-    const { className } = this.props;
-
     return (
-      <div css={[root, className]}>
+      <div css={[root]}>
         <i>{this.icon}</i>
         {this.title}
       </div>

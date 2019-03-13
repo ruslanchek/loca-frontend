@@ -70,7 +70,7 @@ export class Test extends Component<IProps, IState> {
 
   render() {
     return (
-      <div css={appCn}>
+      <div css={appStyles}>
         <ApolloProvider client={apolloClient}>
           <Query<{ getPhrases: Phrase[] }, GetPhrasesInput>
             query={QUERY_GET_PHRASES}
@@ -163,7 +163,7 @@ export class Test extends Component<IProps, IState> {
   }
 }
 
-const appCn = css`
+const appStyles = css`
   margin: 40px;
 
   .Code {

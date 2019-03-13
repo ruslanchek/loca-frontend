@@ -23,7 +23,7 @@ export class Loading extends PureComponent<IProps> {
     return (
       <div
         css={[
-          spinnerCn,
+          spinnerStyles,
           css`
             width: ${size}px;
             height: ${size}px;
@@ -47,11 +47,11 @@ const animation = keyframes`
   }
 `;
 
-const rootCn = css`
+const rootStyles = css`
   position: relative;
 `;
 
-const spinnerCn = css`
+const spinnerStyles = css`
   box-sizing: border-box;
   border-radius: 50%;
   animation: ${animation} 0.6s linear infinite;

@@ -9,7 +9,6 @@ import { Check } from 'react-feather';
 interface IProps {
   title: string;
   subtitle: string;
-  className?: string;
 }
 
 interface IState {
@@ -24,7 +23,6 @@ export class SelectCard extends PureComponent<IProps, IState> {
   };
 
   public static defaultProps: Partial<IProps> = {
-    className: null,
     title: null,
     subtitle: null,
   };
@@ -36,12 +34,13 @@ export class SelectCard extends PureComponent<IProps, IState> {
   };
 
   render() {
-    const { className, title, subtitle } = this.props;
+    const { title, subtitle } = this.props;
     const { checked } = this.state;
 
     return (
       <div
-        css={[cardCn, checked ? 'checked' : '', className]}
+        className={checked ? 'checked' : ''}
+        css={[cardStyles]}
         onClick={this.handleClick}
       >
         <span className="title">
@@ -59,7 +58,7 @@ export class SelectCard extends PureComponent<IProps, IState> {
   }
 }
 
-const cardCn = css`
+const cardStyles = css`
   border-radius: 4px;
   padding: 10px;
   font-size: ${VARIABLES.FONT_SIZE_SMALL}px;

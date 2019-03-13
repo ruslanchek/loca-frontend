@@ -7,14 +7,13 @@ import { EProjectStatus } from '../../generated/graphql.schema';
 
 interface IProps {
   status: EProjectStatus;
-  className?: string;
 }
 
 export class ProjectStatus extends PureComponent<IProps> {
   render() {
-    const { className, status } = this.props;
+    const { status } = this.props;
 
-    return <div css={[statusCn, className, statuses[status]]}>{this.text}</div>;
+    return <div css={[statusStyles, statuses[status]]}>{this.text}</div>;
   }
 
   get text() {
@@ -34,7 +33,7 @@ export class ProjectStatus extends PureComponent<IProps> {
   }
 }
 
-const statusCn = css`
+const statusStyles = css`
   display: flex;
   align-items: center;
   position: relative;
@@ -67,7 +66,7 @@ const statusCn = css`
 
 const statuses = {
   [EProjectStatus.Ready]: css`
-    ${statusCn};
+    ${statusStyles};
 
     &:after {
       background-color: ${COLORS.GREEN.toString()};
@@ -79,7 +78,7 @@ const statuses = {
   `,
 
   [EProjectStatus.Archive]: css`
-    ${statusCn};
+    ${statusStyles};
 
     &:after {
       background-color: ${COLORS.DARK_GRAY.toString()};
@@ -91,7 +90,7 @@ const statuses = {
   `,
 
   [EProjectStatus.TranslationInProgress]: css`
-    ${statusCn};
+    ${statusStyles};
 
     &:after {
       background-color: ${COLORS.YELLOW.toString()};

@@ -5,22 +5,13 @@ import { VARIABLES } from '../../theme/variables';
 import { COLORS } from '../../theme/colors';
 import { css, jsx } from '@emotion/core';
 
-interface IProps {
-  className?: string;
-}
-
-export class Subtitle extends PureComponent<IProps> {
-  public static defaultProps: Partial<IProps> = {
-    className: null,
-  };
-
+export class Subtitle extends PureComponent {
   render() {
-    const { className, children } = this.props;
-    return <div css={[subtitleCn, className]}>{children}</div>;
+    return <div css={subtitleStyles}>{this.props.children}</div>;
   }
 }
 
-const subtitleCn = css`
+const subtitleStyles = css`
   font-size: ${VARIABLES.FONT_SIZE_REGULAR}px;
   color: ${COLORS.DARK_GRAY.toString()};
 `;

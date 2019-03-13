@@ -27,7 +27,7 @@ export class Readyness extends PureComponent<IProps> {
       >
         <div
           css={[
-            containerCn,
+            containerStyles,
             css`
               width: ${size}px;
               min-width: ${size}px;
@@ -42,7 +42,7 @@ export class Readyness extends PureComponent<IProps> {
               {percent >= 100 && (
                 <div
                   css={[
-                    checkCn,
+                    checkStyles,
                     css`
                       width: ${size}px;
                       min-width: ${size}px;
@@ -104,7 +104,7 @@ const root = css`
   position: relative;
 `;
 
-const containerCn = css`
+const containerStyles = css`
   border-radius: 50%;
   border: 1px solid;
   display: block;
@@ -114,7 +114,7 @@ const containerCn = css`
   transform: translate(0, 1px);
 `;
 
-const checkCn = css`
+const checkStyles = css`
   display: flex;
   justify-content: center;
   align-items: center;

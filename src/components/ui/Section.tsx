@@ -4,19 +4,13 @@ import React, { PureComponent } from 'react';
 import { css, jsx } from '@emotion/core';
 import { COLORS } from '../../theme/colors';
 
-interface IProps {
-  className?: string;
-}
-
-export class Section extends PureComponent<IProps> {
+export class Section extends PureComponent {
   render() {
-    const { className, children } = this.props;
-
-    return <section css={[sectionCn, className]}>{children}</section>;
+    return <section css={sectionStyles}>{this.props.children}</section>;
   }
 }
 
-const sectionCn = css`
+const sectionStyles = css`
   border-radius: 6px;
   background-color: ${COLORS.WHITE.toString()};
 `;

@@ -9,11 +9,11 @@ export class TableSubtitle extends PureComponent {
   render() {
     const { children } = this.props;
 
-    return <small css={smallCn}>{children}</small>;
+    return <small css={smallStyles}>{children}</small>;
   }
 }
 
-const smallCn = css`
+const smallStyles = css`
   font-size: ${VARIABLES.FONT_SIZE_SMALL}px;
   color: ${COLORS.GRAY_DARK.toString()};
   display: block;

@@ -6,17 +6,21 @@ import { css, jsx } from '@emotion/core';
 import { COLORS } from '../../theme/colors';
 import { User, Bell } from 'react-feather';
 import { AvatarUser } from '../ui/AvatarUser';
+import { Link } from 'react-router-dom';
+import { PATHS } from '../../paths';
 
 export class Header extends PureComponent {
   render() {
     return (
-      <header css={headerCn}>
-        <Logo css={logo} />
+      <header css={headerStyles}>
+        <Link to={PATHS.PROJECTS}>
+          <Logo css={logo} />
+        </Link>
 
         <nav css={nav}>
-          <a className="active" href="#">
+          <Link to={PATHS.PROJECTS} className="active">
             Projects
-          </a>
+          </Link>
           <a href="#">Languages</a>
           <a href="#">Settings</a>
           <a href="#">Plan</a>
@@ -36,7 +40,7 @@ export class Header extends PureComponent {
   }
 }
 
-const headerCn = css`
+const headerStyles = css`
   border-bottom: 1px solid ${COLORS.GRAY.toString()};
   padding: 0 30px;
   height: 60px;

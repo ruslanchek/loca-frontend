@@ -14,7 +14,7 @@ export class TableHeaderCol extends PureComponent<IProps> {
     return (
       <div
         css={[
-          tableHeaderColCn,
+          tableHeaderColStyles,
           css`
             width: ${width}px;
             min-width: ${width}px;
@@ -27,7 +27,7 @@ export class TableHeaderCol extends PureComponent<IProps> {
   }
 }
 
-const tableHeaderColCn = css`
+const tableHeaderColStyles = css`
   padding: 0 10px;
   box-sizing: border-box;
 `;

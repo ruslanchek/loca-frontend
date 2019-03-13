@@ -8,11 +8,11 @@ export class TableTitle extends PureComponent {
   render() {
     const { children } = this.props;
 
-    return <div css={tableTitleCn}>{children}</div>;
+    return <div css={tableTitleStyles}>{children}</div>;
   }
 }
 
-const tableTitleCn = css`
+const tableTitleStyles = css`
   font-size: ${VARIABLES.FONT_SIZE_REGULAR.toString()}px;
   margin-bottom: 0.4rem;
   font-weight: 600;

@@ -76,7 +76,7 @@ class ProjectsListClass extends PureComponent<IProps> {
     const { history } = this.props;
 
     return (
-      <div css={tableCn}>
+      <div css={tableStyles}>
         <TableHeader>
           <TableHeaderCol width={TABLE_SIZE[0]} />
           <TableHeaderCol width={TABLE_SIZE[1]}>Title</TableHeaderCol>
@@ -100,7 +100,7 @@ class ProjectsListClass extends PureComponent<IProps> {
             {({ loading, error, data, refetch }) => {
               if (loading) {
                 return (
-                  <div css={loadingCn}>
+                  <div css={loadingStyles}>
                     <Loading size={40} />
                   </div>
                 );
@@ -114,7 +114,6 @@ class ProjectsListClass extends PureComponent<IProps> {
                 <React.Fragment>
                   {data.getProjects.map(project => (
                     <TableRow
-                      css={rowCn}
                       key={project.id.toString()}
                       onClick={() => {
                         history.push(
@@ -176,7 +175,7 @@ class ProjectsListClass extends PureComponent<IProps> {
                         alignItems="flex-end"
                         width={TABLE_SIZE[6]}
                       >
-                        <span css={[actionArrow, 'action-arrow']}>
+                        <span css={actionArrow} className="action-arrow">
                           <ChevronRight />
                         </span>
                       </TableCol>
@@ -192,7 +191,7 @@ class ProjectsListClass extends PureComponent<IProps> {
   }
 }
 
-const tableCn = css`
+const tableStyles = css`
   margin-top: 20px;
 `;
 
@@ -202,15 +201,7 @@ const actionArrow = css`
   color: ${COLORS.GRAY_DARK.toString()};
 `;
 
-const rowCn = css`
-  &:hover {
-    .action-arrow {
-      color: ${COLORS.BLACK.toString()};
-    }
-  }
-`;
-
-const loadingCn = css`
+const loadingStyles = css`
   margin: 30px;
   display: flex;
   justify-content: center;
