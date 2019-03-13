@@ -29,6 +29,9 @@ import { ApolloProvider, Query } from 'react-apollo';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { PATHS } from '../../paths';
 import { Loading } from '../ui/Loading';
+import { Title } from '../ui/Title';
+import { Button, EButtonTheme } from '../ui/Button';
+import { HotKeys } from 'react-hotkeys';
 
 interface IProps extends RouteComponentProps {}
 
@@ -57,6 +60,7 @@ const QUERY_GET_PROJECTS = gql`
       basePhrases
       description
       title
+      avatar
     }
   }
 `;
@@ -76,10 +80,17 @@ class ProjectsListClass extends PureComponent<IProps> {
     const { history } = this.props;
 
     return (
-      <div css={tableStyles}>
+      <div>
+        <div css={titleStyles}>
+          <Title>Projects</Title>
+          <Button theme={EButtonTheme.Green}>New project</Button>
+        </div>
+
         <TableHeader>
           <TableHeaderCol width={TABLE_SIZE[0]} />
-          <TableHeaderCol width={TABLE_SIZE[1]}>Title</TableHeaderCol>
+          <TableHeaderCol accent width={TABLE_SIZE[1]}>
+            Title
+          </TableHeaderCol>
           <TableHeaderCol width={TABLE_SIZE[2]}>Status</TableHeaderCol>
           <TableHeaderCol width={TABLE_SIZE[3]}>Last changes</TableHeaderCol>
           <TableHeaderCol width={TABLE_SIZE[4]}>Progress</TableHeaderCol>
@@ -92,13 +103,13 @@ class ProjectsListClass extends PureComponent<IProps> {
             query={QUERY_GET_PROJECTS}
             variables={{
               skip: 0,
-              take: 5,
+              take: 51,
               orderBy: ProjectOrderBy.id,
               orderDirection: CommonOrderDirection.DESC,
             }}
           >
-            {({ loading, error, data, refetch }) => {
-              if (loading) {
+            {result => {
+              if (result.loading) {
                 return (
                   <div css={loadingStyles}>
                     <Loading size={40} />
@@ -106,13 +117,13 @@ class ProjectsListClass extends PureComponent<IProps> {
                 );
               }
 
-              if (error) {
-                return `Error! ${error.message}`;
+              if (result.error) {
+                return `Error! ${result.error.message}`;
               }
 
               return (
                 <React.Fragment>
-                  {data.getProjects.map(project => (
+                  {result.data.getProjects.map(project => (
                     <TableRow
                       key={project.id.toString()}
                       onClick={() => {
@@ -126,7 +137,7 @@ class ProjectsListClass extends PureComponent<IProps> {
                         alignItems="center"
                         justifyContent="center"
                       >
-                        <AvatarProject size={40} src={null} />
+                        <AvatarProject size={40} src={project.avatar} />
                       </TableCol>
 
                       <TableCol width={TABLE_SIZE[1]}>
@@ -191,8 +202,11 @@ class ProjectsListClass extends PureComponent<IProps> {
   }
 }
 
-const tableStyles = css`
-  margin-top: 20px;
+const titleStyles = css`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 `;
 
 const actionArrow = css`

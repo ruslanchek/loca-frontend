@@ -85,6 +85,7 @@ const globalCss = css`
     margin: 0;
     color: ${COLORS.BLACK.toString()};
     font-size: ${VARIABLES.FONT_SIZE_REGULAR}px;
+    line-height: 1.3;
 
     &.disable-hover {
       pointer-events: none;

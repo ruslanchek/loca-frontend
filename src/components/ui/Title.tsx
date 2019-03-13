@@ -14,5 +14,4 @@ export class Title extends PureComponent {
 const titleStyles = css`
   font-weight: 600;
   font-size: ${VARIABLES.FONT_SIZE_BIG}px;
-  color: ${COLORS.BLACK.toString()};
 `;

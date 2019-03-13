@@ -13,6 +13,7 @@ interface IProps {
 
 export enum EButtonTheme {
   Green,
+  Blue,
 }
 
 export class Button extends PureComponent<IProps> {
@@ -37,7 +38,7 @@ export class Button extends PureComponent<IProps> {
 }
 
 const buttonStyles = css`
-  border-radius: 6px;
+  border-radius: 4px;
   border: none;
   font-weight: 600;
   font-family: ${VARIABLES.FONT_FAMILY};
@@ -57,6 +58,18 @@ const themes = {
 
     &:hover {
       background-color: ${COLORS.GREEN.lighten(0.1).toString()};
+    }
+
+    &:active {
+      transform: scale(0.97);
+    }
+  `,
+
+  [EButtonTheme.Blue]: css`
+    background-color: ${COLORS.BLUE.toString()};
+
+    &:hover {
+      background-color: ${COLORS.BLUE.lighten(0.1).toString()};
     }
 
     &:active {

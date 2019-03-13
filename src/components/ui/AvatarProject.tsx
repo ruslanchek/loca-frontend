@@ -43,7 +43,7 @@ export class AvatarProject extends PureComponent<IProps> {
 
 const subtitleStyles = css`
   background-color: ${COLORS.BLUE.alpha(0.1).toString()};
-  border-radius: 50%;
+  border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,5 +52,5 @@ const subtitleStyles = css`
 `;
 
 const imgStyles = css`
-  border-radius: 50%;
+  border-radius: 8px;
 `;

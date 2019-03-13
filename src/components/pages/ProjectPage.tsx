@@ -1,23 +1,19 @@
 /** @jsx jsx */
 
 import React, { PureComponent } from 'react';
-import { Title } from '../ui/Title';
-import { Button, EButtonTheme } from '../ui/Button';
 import { css, jsx } from '@emotion/core';
 import { RouteComponentProps } from 'react-router';
+import { ProjectInfo } from '../projects/ProjectInfo';
 
-export class ProjectPage extends PureComponent<RouteComponentProps> {
+export class ProjectPage extends PureComponent<
+  RouteComponentProps<{ id: string }>
+> {
   render() {
     const { match } = this.props;
 
     return (
       <div css={contentStyles}>
-        <div css={titleStyles}>
-          <Title>Projects</Title>
-          <Button theme={EButtonTheme.Green}>New project</Button>
-        </div>
-
-        {JSON.stringify(match)}
+        <ProjectInfo id={parseInt(match.params.id)} />
       </div>
     );
   }

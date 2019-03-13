@@ -2,22 +2,25 @@
 
 import React, { PureComponent } from 'react';
 import { css, jsx } from '@emotion/core';
+import { COLORS } from '../../theme/colors';
 
 interface IProps {
   width: string;
+  accent?: boolean;
 }
 
 export class TableHeaderCol extends PureComponent<IProps> {
   render() {
-    const { children, width } = this.props;
+    const { children, width, accent } = this.props;
 
     return (
       <div
+        className={accent ? 'accent' : ''}
         css={[
           tableHeaderColStyles,
           css`
-            width: ${width}px;
-            min-width: ${width}px;
+            width: ${width};
+            min-width: ${width};
           `,
         ]}
       >
@@ -30,4 +33,8 @@ export class TableHeaderCol extends PureComponent<IProps> {
 const tableHeaderColStyles = css`
   padding: 0 10px;
   box-sizing: border-box;
+
+  &.accent {
+    color: ${COLORS.BLACK.toString()};
+  }
 `;

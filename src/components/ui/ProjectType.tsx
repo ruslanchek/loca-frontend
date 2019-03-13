@@ -4,6 +4,8 @@ import React, { PureComponent } from 'react';
 import { css, jsx } from '@emotion/core';
 import { Globe, Book, Smartphone, Flag, Zap } from 'react-feather';
 import { EProjectType } from '../../generated/graphql.schema';
+import { COLORS } from '../../theme/colors';
+import { VARIABLES } from '../../theme/variables';
 
 interface IProps {
   type: EProjectType;
@@ -12,7 +14,7 @@ interface IProps {
 export class ProjectType extends PureComponent<IProps> {
   render() {
     return (
-      <div css={[root]}>
+      <div css={rootStyles}>
         <i>{this.icon}</i>
         {this.title}
       </div>
@@ -83,10 +85,13 @@ export class ProjectType extends PureComponent<IProps> {
   }
 }
 
-const root = css`
+const rootStyles = css`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  color: ${COLORS.GRAY_DARK.toString()};
+  font-size: ${VARIABLES.FONT_SIZE_SMALL.toString()}px;
+  font-weight: 400;
 
   > i {
     margin-right: 0.5ex;

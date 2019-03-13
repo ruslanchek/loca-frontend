@@ -42,7 +42,7 @@ export class AvatarUser extends PureComponent<IProps> {
 
 const subtitleStyles = css`
   background-color: ${COLORS.BLUE.alpha(0.1).toString()};
-  border-radius: 50%;
+  border-radius: 6px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,5 +51,5 @@ const subtitleStyles = css`
 `;
 
 const imgStyles = css`
-  border-radius: 50%;
+  border-radius: 6px;
 `;

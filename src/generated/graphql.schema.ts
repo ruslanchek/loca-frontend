@@ -77,6 +77,7 @@ export class Project {
     basePhrases: number;
     baseWords: number;
     issues: number;
+    avatar: string;
 }
 
 export abstract class IQuery {

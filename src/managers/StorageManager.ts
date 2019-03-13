@@ -12,12 +12,10 @@ export class StorageManager {
 	}
 
 	public init(): Promise<any> {
-		return new Promise((resolve, reject) => {
-			this.cookies = new Cookies();
-			this.local = new Local('localStorage').getInstance();
-			this.session = new Local('sessionStorage').getInstance();
+		this.cookies = new Cookies();
+		this.local = new Local('localStorage').getInstance();
+		this.session = new Local('sessionStorage').getInstance();
 
-			resolve();
-		});
+		return Promise.resolve();
 	}
 }
