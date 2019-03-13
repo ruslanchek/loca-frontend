@@ -1,7 +1,9 @@
+/** @jsx jsx */
+
 import React, { PureComponent } from 'react';
 import { VARIABLES } from '../../theme/variables';
 import { COLORS } from '../../theme/colors';
-import { css, cx } from 'emotion';
+import { css, jsx } from '@emotion/core';
 
 interface IProps {
   className?: string;
@@ -14,7 +16,7 @@ export class Title extends PureComponent<IProps> {
 
   render() {
     const { className, children } = this.props;
-    return <div className={cx(titleCn, className)}>{children}</div>;
+    return <div css={[titleCn, className]}>{children}</div>;
   }
 }
 

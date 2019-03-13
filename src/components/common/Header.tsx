@@ -1,6 +1,8 @@
+/** @jsx jsx */
+
 import React, { PureComponent } from 'react';
 import { ReactComponent as Logo } from '../../img/logo.svg';
-import { css, cx } from 'emotion';
+import { css, jsx } from '@emotion/core';
 import { COLORS } from '../../theme/colors';
 import { User, Bell } from 'react-feather';
 import { AvatarUser } from '../ui/AvatarUser';
@@ -8,10 +10,10 @@ import { AvatarUser } from '../ui/AvatarUser';
 export class Header extends PureComponent {
   render() {
     return (
-      <header className={headerCn}>
-        <Logo className={logo} />
+      <header css={headerCn}>
+        <Logo css={logo} />
 
-        <nav className={nav}>
+        <nav css={nav}>
           <a className="active" href="#">
             Projects
           </a>
@@ -20,7 +22,7 @@ export class Header extends PureComponent {
           <a href="#">Plan</a>
         </nav>
 
-        <div className={user}>
+        <div css={user}>
           <a href="#" className="link">
             <i />
             <Bell size={16} />

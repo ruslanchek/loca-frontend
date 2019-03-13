@@ -1,17 +1,15 @@
+/** @jsx jsx */
+
 import React, { PureComponent } from 'react';
-import { css, cx } from 'emotion';
+import { css, jsx } from '@emotion/core';
 import { COLORS } from '../../theme/colors';
-import {VARIABLES} from "../../theme/variables";
+import { VARIABLES } from '../../theme/variables';
 
-interface IProps {
-  className?: string;
-}
-
-export class TableSubtitle extends PureComponent<IProps> {
+export class TableSubtitle extends PureComponent {
   render() {
-    const { className, children } = this.props;
+    const { children } = this.props;
 
-    return <small className={cx(smallCn, className)}>{children}</small>;
+    return <small css={smallCn}>{children}</small>;
   }
 }
 

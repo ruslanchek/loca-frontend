@@ -1,7 +1,8 @@
+/** @jsx jsx */
+
 import React, { PureComponent } from 'react';
-import { VARIABLES } from '../../theme/variables';
 import { COLORS } from '../../theme/colors';
-import { css, cx } from 'emotion';
+import { css, jsx } from '@emotion/core';
 
 interface IProps {
   className?: string;
@@ -14,7 +15,7 @@ export class Fade extends PureComponent<IProps> {
 
   render() {
     const { className, children } = this.props;
-    return <span className={cx(subtitleCn, className)}>{children}</span>;
+    return <span css={[subtitleCn, className]}>{children}</span>;
   }
 }
 

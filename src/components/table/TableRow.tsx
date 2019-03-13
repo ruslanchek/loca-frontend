@@ -1,16 +1,22 @@
+/** @jsx jsx */
+
 import React, { PureComponent } from 'react';
-import { css, cx } from 'emotion';
+import { css, jsx } from '@emotion/core';
 import { COLORS } from '../../theme/colors';
 
 interface IProps {
-  className?: string;
+  onClick?: () => void;
 }
 
 export class TableRow extends PureComponent<IProps> {
   render() {
-    const { children, className } = this.props;
+    const { children, onClick } = this.props;
 
-    return <div className={cx(tableRowCn, className)}>{children}</div>;
+    return (
+      <div onClick={() => onClick()} css={tableRowCn}>
+        {children}
+      </div>
+    );
   }
 }
 

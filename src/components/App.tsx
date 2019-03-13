@@ -1,55 +1,92 @@
-import React, { PureComponent } from 'react';
-import { css, injectGlobal } from 'emotion';
+import React, { ComponentClass, PureComponent } from 'react';
+import { css, Global } from '@emotion/core';
 import { COLORS } from '../theme/colors';
 import { Section } from './ui/Section';
 import { VARIABLES } from '../theme/variables';
-import { Title } from './ui/Title';
 import { Header } from './common/Header';
-import { ProjectsList } from './projects/ProjectsList';
-import { Button, EButtonTheme } from './ui/Button';
-import { Plus } from 'react-feather';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { PATHS } from '../paths';
+import { ProjectsPage } from './pages/ProjectsPage';
+import { ProjectPage } from './pages/ProjectPage';
 
-injectGlobal`
-	body {
-    font-family: ${VARIABLES.FONT_FAMILY};
-    background-color: ${COLORS.GRAY.toString()};
-    margin: 0;
-    color: ${COLORS.BLACK.toString()};
-    font-size: ${VARIABLES.FONT_SIZE_REGULAR}px;
-  }
-`;
+const body = document.body;
+let timer = null;
 
-interface IProps {}
+window.addEventListener(
+  'scroll',
+  () => {
+    clearTimeout(timer);
 
-interface IState {}
+    if (!body.classList.contains('disable-hover')) {
+      body.classList.add('disable-hover');
+    }
 
-export class App extends PureComponent<IProps, IState> {
+    timer = setTimeout(() => {
+      body.classList.remove('disable-hover');
+    }, 300);
+  },
+  false,
+);
+
+interface IRoute {
+  component: ComponentClass;
+  path: string;
+}
+
+const ROUTES: IRoute[] = [
+  {
+    path: PATHS.PROJECTS,
+    component: ProjectsPage,
+  },
+
+  {
+    path: PATHS.PROJECT,
+    component: ProjectPage,
+  },
+];
+
+export class App extends PureComponent {
   render() {
     return (
-      <main className={appCn}>
-        <Section className={sectionCn}>
+      <main css={appCn}>
+        <Section css={sectionCn}>
           <Header />
 
-          <div className={contentCn}>
-            <div className={titleCn}>
-              <Title>Projects</Title>
-              <Button theme={EButtonTheme.Green}>
-                New project
-              </Button>
-            </div>
+          <BrowserRouter>
+            <Switch>
+              {ROUTES.map(route => (
+                <Route
+                  key={route.path}
+                  path={route.path}
+                  component={route.component}
+                />
+              ))}
 
-            <ProjectsList />
-          </div>
+              <Route path="*">
+                <Redirect to={PATHS.NOT_FOUND} />
+              </Route>
+            </Switch>
+          </BrowserRouter>
         </Section>
+
+        <Global styles={globalCss} />
       </main>
     );
   }
 }
 
-const titleCn = css`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+const globalCss = css`
+  body {
+    font-family: ${VARIABLES.FONT_FAMILY};
+    background-color: ${COLORS.GRAY.toString()};
+    margin: 0;
+    color: ${COLORS.BLACK.toString()};
+    font-size: ${VARIABLES.FONT_SIZE_REGULAR}px;
+
+    &.disable-hover {
+      pointer-events: none;
+    }
+  }
 `;
 
 const sectionCn = css`
@@ -64,9 +101,5 @@ const sectionCn = css`
 `;
 
 const appCn = css`
-  padding: 30px;
-`;
-
-const contentCn = css`
   padding: 30px;
 `;

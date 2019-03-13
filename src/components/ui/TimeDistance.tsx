@@ -17,6 +17,6 @@ export class TimeDistance extends PureComponent<IProps> {
 
     str = str.charAt(0).toUpperCase() + str.slice(1);
 
-    return <>{str}</>;
+    return <React.Fragment>{str}</React.Fragment>;
   }
 }

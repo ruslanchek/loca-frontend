@@ -1,5 +1,7 @@
+/** @jsx jsx */
+
 import React, { PureComponent } from 'react';
-import { css, cx } from 'emotion';
+import { css, jsx } from '@emotion/core';
 import { COLORS } from '../../theme/colors';
 import { TableHeader } from '../table/TableHeader';
 import { TableHeaderCol } from '../table/TableHeaderCol';
@@ -18,32 +20,17 @@ import { TimeDistance } from '../ui/TimeDistance';
 import { gql } from 'apollo-boost';
 import {
   CommonOrderDirection,
-  EProjectStatus,
-  EProjectType,
-  GetPhrasesInput,
   GetProjectsInput,
-  Phrase,
-  PhraseOrderBy,
   Project,
   ProjectOrderBy,
 } from '../../generated/graphql.schema';
 import { apolloClient } from '../../api/network.layer';
 import { ApolloProvider, Query } from 'react-apollo';
+import { RouteComponentProps, withRouter } from 'react-router';
+import { PATHS } from '../../paths';
+import { Loading } from '../ui/Loading';
 
-interface IProps {}
-
-interface IProject {
-  id: number;
-  avatar: string;
-  title: string;
-  type: EProjectType;
-  status: EProjectStatus;
-  lastEdit: Date;
-  readyness: number;
-  basePhrases: number;
-  baseWords: number;
-  issues: number;
-}
+interface IProps extends RouteComponentProps {}
 
 const QUERY_GET_PROJECTS = gql`
   query(
@@ -84,12 +71,12 @@ const TABLE_SIZE = [
   '40px',
 ];
 
-export class ProjectsList extends PureComponent<IProps> {
+class ProjectsListClass extends PureComponent<IProps> {
   render() {
-    const {} = this.props;
+    const { history } = this.props;
 
     return (
-      <div className={tableCn}>
+      <div css={tableCn}>
         <TableHeader>
           <TableHeaderCol width={TABLE_SIZE[0]} />
           <TableHeaderCol width={TABLE_SIZE[1]}>Title</TableHeaderCol>
@@ -105,14 +92,18 @@ export class ProjectsList extends PureComponent<IProps> {
             query={QUERY_GET_PROJECTS}
             variables={{
               skip: 0,
-              take: 10,
+              take: 5,
               orderBy: ProjectOrderBy.id,
               orderDirection: CommonOrderDirection.DESC,
             }}
           >
             {({ loading, error, data, refetch }) => {
               if (loading) {
-                return 'Loading...';
+                return (
+                  <div css={loadingCn}>
+                    <Loading size={40} />
+                  </div>
+                );
               }
 
               if (error) {
@@ -120,9 +111,17 @@ export class ProjectsList extends PureComponent<IProps> {
               }
 
               return (
-                <>
+                <React.Fragment>
                   {data.getProjects.map(project => (
-                    <TableRow className={rowCn} key={project.id.toString()}>
+                    <TableRow
+                      css={rowCn}
+                      key={project.id.toString()}
+                      onClick={() => {
+                        history.push(
+                          PATHS.PROJECT.replace(':id', project.id.toString()),
+                        );
+                      }}
+                    >
                       <TableCol
                         width={TABLE_SIZE[0]}
                         alignItems="center"
@@ -155,11 +154,8 @@ export class ProjectsList extends PureComponent<IProps> {
                       </TableCol>
 
                       <TableCol width={TABLE_SIZE[4]}>
-                        <TableTitle className={readynessCn}>
-                          <i>
-                            <Readyness size={11} percent={project.readyness} />
-                          </i>
-                          <span>{project.readyness}%</span>
+                        <TableTitle>
+                          <Readyness size={13} percent={project.readyness} />
                         </TableTitle>
                         <TableSubtitle>
                           <NumberValue value={project.issues} /> issues
@@ -180,13 +176,13 @@ export class ProjectsList extends PureComponent<IProps> {
                         alignItems="flex-end"
                         width={TABLE_SIZE[6]}
                       >
-                        <span className={cx(actionArrow, 'action-arrow')}>
+                        <span css={[actionArrow, 'action-arrow']}>
                           <ChevronRight />
                         </span>
                       </TableCol>
                     </TableRow>
                   ))}
-                </>
+                </React.Fragment>
               );
             }}
           </Query>
@@ -198,17 +194,6 @@ export class ProjectsList extends PureComponent<IProps> {
 
 const tableCn = css`
   margin-top: 20px;
-`;
-
-const readynessCn = css`
-  display: flex;
-  align-items: center;
-
-  > i {
-    margin-right: 1ex;
-    display: flex;
-    align-items: center;
-  }
 `;
 
 const actionArrow = css`
@@ -224,3 +209,12 @@ const rowCn = css`
     }
   }
 `;
+
+const loadingCn = css`
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ProjectsList = withRouter(ProjectsListClass);

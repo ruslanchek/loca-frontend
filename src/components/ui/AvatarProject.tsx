@@ -1,6 +1,9 @@
+/** @jsx jsx */
+
 import React, { PureComponent } from 'react';
 import { COLORS } from '../../theme/colors';
-import { css, cx } from 'emotion';
+import { css, jsx } from '@emotion/core';
+import { Folder } from 'react-feather';
 
 interface IProps {
   src: string;
@@ -15,17 +18,24 @@ export class AvatarProject extends PureComponent<IProps> {
   };
 
   render() {
-    const { className, size, src } = this.props;
+    const { size, src } = this.props;
+
     return (
       <div
-        className={cx(subtitleCn, className)}
-        style={{
-          width: `${size}px`,
-          minWidth: `${size}px`,
-          height: `${size}px`,
-        }}
+        css={[
+          subtitleCn,
+          css`
+            width: ${size}px;
+            min-width: ${size}px;
+            height: ${size}px;
+          `,
+        ]}
       >
-        <img width={size} height={size} className={imgCn} src={src}/>
+        {src ? (
+          <img width={size} height={size} css={imgCn} src={src} />
+        ) : (
+          <Folder color={COLORS.BLUE.toString()} size={size / 2} />
+        )}
       </div>
     );
   }

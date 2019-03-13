@@ -9,6 +9,10 @@ export class NumberValue extends PureComponent<IProps> {
   render() {
     const { value } = this.props;
 
-    return <>{value.toLocaleString(CONFIG.DEFAULT_LOCALE)}</>;
+    return (
+      <React.Fragment>
+        {value.toLocaleString(CONFIG.DEFAULT_LOCALE)}
+      </React.Fragment>
+    );
   }
 }

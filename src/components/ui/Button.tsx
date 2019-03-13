@@ -1,5 +1,7 @@
+/** @jsx jsx */
+
 import React, { PureComponent } from 'react';
-import { css, cx } from 'emotion';
+import { css, jsx } from '@emotion/core';
 import { COLORS } from '../../theme/colors';
 import { VARIABLES } from '../../theme/variables';
 
@@ -28,7 +30,7 @@ export class Button extends PureComponent<IProps> {
       <button
         onClick={() => onClick()}
         type={type}
-        className={cx(buttonCn, themes[theme], className)}
+        css={[buttonCn, themes[theme], className]}
       >
         {children}
       </button>

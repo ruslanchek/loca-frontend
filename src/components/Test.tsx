@@ -1,3 +1,5 @@
+/** @jsx jsx */
+
 import { gql } from 'apollo-boost';
 import React, { Component } from 'react';
 import { ApolloProvider, Mutation, Query, Subscription } from 'react-apollo';
@@ -9,7 +11,7 @@ import {
   Phrase,
   PhraseOrderBy,
 } from '../generated/graphql.schema';
-import { css } from 'emotion';
+import { css, jsx } from '@emotion/core';
 
 const QUERY_GET_PHRASES = gql`
   query(
@@ -68,7 +70,7 @@ export class Test extends Component<IProps, IState> {
 
   render() {
     return (
-      <div className={appCn}>
+      <div css={appCn}>
         <ApolloProvider client={apolloClient}>
           <Query<{ getPhrases: Phrase[] }, GetPhrasesInput>
             query={QUERY_GET_PHRASES}
@@ -97,7 +99,7 @@ export class Test extends Component<IProps, IState> {
                     }}
                   >
                     {result => (
-                      <div className="Code">
+                      <div css="Code">
                         {result.loading && <div>Waiting...</div>}
                         {JSON.stringify(result.data)}
                       </div>
@@ -109,7 +111,7 @@ export class Test extends Component<IProps, IState> {
                   >
                     {(createPhrase, result) => {
                       return (
-                        <div className="Form">
+                        <div css="form">
                           <form
                             onSubmit={e => {
                               e.preventDefault();
@@ -144,9 +146,9 @@ export class Test extends Component<IProps, IState> {
                     }}
                   </Mutation>
 
-                  <div className="List">
+                  <div css="List">
                     {data.getPhrases.map((phrase: Phrase) => (
-                      <div className="Item" key={phrase.id}>
+                      <div css="Item" key={phrase.id}>
                         {phrase.id}. {phrase.phraseId}
                       </div>
                     ))}

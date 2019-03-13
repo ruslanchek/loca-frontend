@@ -1,5 +1,7 @@
-import React, { Component, ComponentClass, PureComponent } from 'react';
-import { css, cx } from 'emotion';
+/** @jsx jsx */
+
+import React, { PureComponent } from 'react';
+import { css, jsx } from '@emotion/core';
 import { COLORS } from '../../theme/colors';
 import { VARIABLES } from '../../theme/variables';
 import { Check } from 'react-feather';
@@ -39,7 +41,7 @@ export class SelectCard extends PureComponent<IProps, IState> {
 
     return (
       <div
-        className={cx(cardCn, checked ? 'checked' : '', className)}
+        css={[cardCn, checked ? 'checked' : '', className]}
         onClick={this.handleClick}
       >
         <span className="title">

@@ -9,6 +9,10 @@ export class TimeValue extends PureComponent<IProps> {
   render() {
     const { value } = this.props;
 
-    return <>{value.toLocaleTimeString(CONFIG.DEFAULT_LOCALE)}</>;
+    return (
+      <React.Fragment>
+        {value.toLocaleTimeString(CONFIG.DEFAULT_LOCALE)}
+      </React.Fragment>
+    );
   }
 }

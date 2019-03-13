@@ -1,17 +1,14 @@
+/** @jsx jsx */
+
 import React, { PureComponent } from 'react';
-import { css, cx } from 'emotion';
-import { COLORS } from '../../theme/colors';
+import { css, jsx } from '@emotion/core';
 import { VARIABLES } from '../../theme/variables';
 
-interface IProps {
-  className?: string;
-}
-
-export class TableTitle extends PureComponent<IProps> {
+export class TableTitle extends PureComponent {
   render() {
-    const { className, children } = this.props;
+    const { children } = this.props;
 
-    return <div className={cx(tableTitleCn, className)}>{children}</div>;
+    return <div css={tableTitleCn}>{children}</div>;
   }
 }
 

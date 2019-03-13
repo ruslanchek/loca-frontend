@@ -1,5 +1,7 @@
+/** @jsx jsx */
+
 import React, { PureComponent } from 'react';
-import { css, cx } from 'emotion';
+import { css, jsx } from '@emotion/core';
 import { COLORS } from '../../theme/colors';
 import PieChart from 'react-minimal-pie-chart';
 import Color from 'color';
@@ -8,43 +10,48 @@ import { Check } from 'react-feather';
 interface IProps {
   size: number;
   percent: number;
-  className?: string;
 }
 
 export class Readyness extends PureComponent<IProps> {
   render() {
-    const { className, size, percent } = this.props;
+    const { size, percent } = this.props;
 
     return (
       <div
-        className={root}
-        style={{
-          width: size,
-        }}
+        css={[
+          root,
+          css`
+            width: ${size}px;
+          `,
+        ]}
       >
-        <i
-          className={nullCn}
-          style={{
-            width: `${size}px`,
-            minWidth: `${size}px`,
-            height: `${size}px`,
-            borderColor: this.color.toString(),
-            backgroundColor: this.color.alpha(0.15).toString(),
-          }}
+        <div
+          css={[
+            containerCn,
+            css`
+              width: ${size}px;
+              min-width: ${size}px;
+              height: ${size}px;
+              border-color: ${this.color.toString()};
+              background-color: ${this.color.alpha(0.15).toString()};
+            `,
+          ]}
         >
           {percent > 0 && (
-            <>
+            <React.Fragment>
               {percent >= 100 && (
-                <i
-                  className={checkCn}
-                  style={{
-                    width: `${size}px`,
-                    minWidth: `${size}px`,
-                    height: `${size}px`,
-                  }}
+                <div
+                  css={[
+                    checkCn,
+                    css`
+                      width: ${size}px;
+                      min-width: ${size}px;
+                      height: ${size}px;
+                    `,
+                  ]}
                 >
                   <Check color={COLORS.WHITE.toString()} size={9} />
-                </i>
+                </div>
               )}
 
               <PieChart
@@ -57,9 +64,10 @@ export class Readyness extends PureComponent<IProps> {
                   { title: '', value: 100 - percent, color: 'transparent' },
                 ]}
               />
-            </>
+            </React.Fragment>
           )}
-        </i>
+        </div>
+        {percent}%
       </div>
     );
   }
@@ -92,20 +100,26 @@ export class Readyness extends PureComponent<IProps> {
 }
 
 const root = css`
+  padding-left: 20px;
   position: relative;
 `;
 
-const nullCn = css`
+const containerCn = css`
   border-radius: 50%;
   border: 1px solid;
   display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(0, 1px);
 `;
 
 const checkCn = css`
-  position: absolute;
-  top: 1px;
-  left: 1px;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(0, 1px);
 `;

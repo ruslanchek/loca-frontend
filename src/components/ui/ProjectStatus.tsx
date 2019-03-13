@@ -1,7 +1,9 @@
+/** @jsx jsx */
+
 import React, { PureComponent } from 'react';
-import { css, cx } from 'emotion';
+import { css, jsx } from '@emotion/core';
 import { COLORS } from '../../theme/colors';
-import {EProjectStatus} from "../../generated/graphql.schema";
+import { EProjectStatus } from '../../generated/graphql.schema';
 
 interface IProps {
   status: EProjectStatus;
@@ -12,11 +14,7 @@ export class ProjectStatus extends PureComponent<IProps> {
   render() {
     const { className, status } = this.props;
 
-    return (
-      <div className={cx(statusCn, className, statuses[status])}>
-        {this.text}
-      </div>
-    );
+    return <div css={[statusCn, className, statuses[status]]}>{this.text}</div>;
   }
 
   get text() {
@@ -40,6 +38,7 @@ const statusCn = css`
   display: flex;
   align-items: center;
   position: relative;
+  padding-left: 20px;
 
   &:before {
     width: 16px;
@@ -47,7 +46,10 @@ const statusCn = css`
     border-radius: 50%;
     content: '';
     display: block;
-    margin-right: 1ex;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translate(0, 1px);
   }
 
   &:after {
@@ -57,8 +59,9 @@ const statusCn = css`
     content: '';
     display: block;
     position: absolute;
-    left: 5px;
-    top: 5.5px;
+    left: 0;
+    top: 0;
+    transform: translate(5px, 6px);
   }
 `;
 

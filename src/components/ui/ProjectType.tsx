@@ -1,5 +1,7 @@
+/** @jsx jsx */
+
 import React, { PureComponent } from 'react';
-import { css, cx } from 'emotion';
+import { css, jsx } from '@emotion/core';
 import { Globe, Book, Smartphone, Flag, Zap } from 'react-feather';
 import {EProjectType} from "../../generated/graphql.schema";
 
@@ -13,7 +15,7 @@ export class ProjectType extends PureComponent<IProps> {
     const { className } = this.props;
 
     return (
-      <div className={cx(root, className)}>
+      <div css={[root, className]}>
         <i>{this.icon}</i>
         {this.title}
       </div>

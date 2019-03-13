@@ -1,5 +1,7 @@
+/** @jsx jsx */
+
 import React, { PureComponent } from 'react';
-import { css, cx } from 'emotion';
+import { css, jsx } from '@emotion/core';
 import { AlignItemsProperty, JustifyContentProperty } from 'csstype';
 
 interface IProps {
@@ -19,8 +21,15 @@ export class TableCol extends PureComponent<IProps> {
 
     return (
       <div
-        style={{ width, minWidth: width, alignItems, justifyContent }}
-        className={tableColCn}
+        css={[
+          tableColCn,
+          css`
+            width: ${width};
+            min-width: ${width};
+            align-items: ${alignItems};
+            justify-content: ${justifyContent};
+          `,
+        ]}
       >
         {children}
       </div>

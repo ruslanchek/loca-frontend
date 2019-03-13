@@ -1,5 +1,7 @@
+/** @jsx jsx */
+
 import React, { PureComponent } from 'react';
-import { css, cx } from 'emotion';
+import { css, jsx } from '@emotion/core';
 import { COLORS } from '../../theme/colors';
 
 interface IProps {
@@ -10,7 +12,7 @@ export class Section extends PureComponent<IProps> {
   render() {
     const { className, children } = this.props;
 
-    return <section className={cx(sectionCn, className)}>{children}</section>;
+    return <section css={[sectionCn, className]}>{children}</section>;
   }
 }
 

@@ -1,5 +1,7 @@
+/** @jsx jsx */
+
 import React, { PureComponent } from 'react';
-import { css, cx } from 'emotion';
+import { css, jsx } from '@emotion/core';
 import { COLORS } from '../../theme/colors';
 import {VARIABLES} from "../../theme/variables";
 
@@ -9,7 +11,7 @@ export class TableHeader extends PureComponent<IProps> {
   render() {
     const { children } = this.props;
 
-    return <div className={tableHeaderCn}>{children}</div>;
+    return <div css={tableHeaderCn}>{children}</div>;
   }
 }
 

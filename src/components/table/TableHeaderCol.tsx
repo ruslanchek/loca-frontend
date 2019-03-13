@@ -1,6 +1,7 @@
+/** @jsx jsx */
+
 import React, { PureComponent } from 'react';
-import { css, cx } from 'emotion';
-import { COLORS } from '../../theme/colors';
+import { css, jsx } from '@emotion/core';
 
 interface IProps {
   width: string;
@@ -11,7 +12,15 @@ export class TableHeaderCol extends PureComponent<IProps> {
     const { children, width } = this.props;
 
     return (
-      <div style={{ width, minWidth: width }} className={tableHeaderColCn}>
+      <div
+        css={[
+          tableHeaderColCn,
+          css`
+            width: ${width}px;
+            min-width: ${width}px;
+          `,
+        ]}
+      >
         {children}
       </div>
     );
