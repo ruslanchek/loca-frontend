@@ -24,6 +24,7 @@
     "react-minimal-pie-chart": "^3.5.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.5",
+    "react-stores": "^2.10.0",
     "subscriptions-transport-ws": "^0.9.15",
     "ts-typed-events": "^1.1.1",
     "typescript": "3.3.3333"

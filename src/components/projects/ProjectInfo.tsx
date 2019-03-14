@@ -18,9 +18,10 @@ import { Title } from '../ui/Title';
 import { AvatarProject } from '../ui/AvatarProject';
 import { NotFound } from '../common/NotFound';
 import { ProjectType } from '../ui/ProjectType';
+import { managers } from '../../managers';
 
 interface IProps {
-  id: number;
+  id: string;
 }
 
 interface IState {
@@ -52,74 +53,20 @@ export class ProjectInfo extends Component<IProps, IState> {
       loading: true,
     });
 
-    const project = await this.getProject(this.props.id);
-    const phrases = await this.getPhrases(this.props.id);
+    try {
+      const project = await managers.projects.getProject(this.props.id);
+      const phrases = await managers.phrases.getPhrases(this.props.id);
 
-    this.setState({
-      loading: false,
-      project,
-      phrases,
-    });
-  }
-
-  async getProject(id: number): Promise<Project> {
-    const result = await apolloClient.query({
-      query: gql`
-        query($id: ID!) {
-          getProject(id: $id) {
-            id
-            title
-            avatar
-            type
-          }
-        }
-      `,
-      variables: {
-        id,
-      },
-    });
-
-    return result.data.getProject;
-  }
-
-  async getPhrases(projectId: number): Promise<Phrase[]> {
-    const result = await apolloClient.query<
-      { getPhrases: Phrase[] },
-      GetPhrasesInput
-    >({
-      query: gql`
-        query(
-          $skip: Int!
-          $take: Int!
-          $orderBy: PhraseOrderBy!
-          $orderDirection: CommonOrderDirection!
-          $projectId: ID!
-        ) {
-          getPhrases(
-            getPhrasesInput: {
-              projectId: $projectId
-              skip: $skip
-              take: $take
-              orderBy: $orderBy
-              orderDirection: $orderDirection
-            }
-          ) {
-            id
-            phraseId
-            tags
-          }
-        }
-      `,
-      variables: {
-        projectId: projectId.toString(),
-        skip: 0,
-        take: 1000,
-        orderBy: PhraseOrderBy.id,
-        orderDirection: CommonOrderDirection.DESC,
-      },
-    });
-
-    return result.data.getPhrases;
+      this.setState({
+        loading: false,
+        project,
+        phrases,
+      });
+    } catch (error) {
+      this.setState({
+        loading: false,
+      });
+    }
   }
 
   render() {

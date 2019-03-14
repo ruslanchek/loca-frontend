@@ -13,17 +13,11 @@ export class ProjectPage extends PureComponent<
 
     return (
       <div css={contentStyles}>
-        <ProjectInfo id={parseInt(match.params.id)} />
+        <ProjectInfo id={match.params.id} />
       </div>
     );
   }
 }
-
-const titleStyles = css`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
 
 const contentStyles = css`
   padding: 30px;
