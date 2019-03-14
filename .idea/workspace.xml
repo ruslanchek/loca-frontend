@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3412682-afa0-4fd3-8bd7-58c9ae250b07" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/managers/PhrasesManager.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/ProjectPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/ProjectPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/projects/ProjectInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projects/ProjectInfo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/projects/ProjectsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projects/ProjectsList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/managers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/managers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/managers/SubscriptionManager.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/managers/ProjectsManager.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -83,8 +75,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/managers/PhrasesManager.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="21" column="19" lean-forward="true" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+            <state relative-caret-position="282">
+              <caret line="27" column="34" lean-forward="true" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -92,8 +84,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/generated/graphql.schema.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="42" column="13" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
+            <state relative-caret-position="315">
+              <caret line="21" column="1" lean-forward="true" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -213,15 +205,15 @@
         <option value="$PROJECT_DIR$/src/components/common/NotFound.tsx" />
         <option value="$PROJECT_DIR$/src/components/common/Header.tsx" />
         <option value="$PROJECT_DIR$/src/components/Test.tsx" />
-        <option value="$PROJECT_DIR$/src/generated/graphql.schema.ts" />
         <option value="$PROJECT_DIR$/src/components/ui/AvatarProject.tsx" />
-        <option value="$PROJECT_DIR$/src/managers/PhrasesManager.ts" />
         <option value="$PROJECT_DIR$/src/managers.ts" />
         <option value="$PROJECT_DIR$/src/components/projects/ProjectInfo.tsx" />
         <option value="$PROJECT_DIR$/src/components/projects/ProjectsList.tsx" />
         <option value="$PROJECT_DIR$/src/components/pages/ProjectPage.tsx" />
         <option value="$PROJECT_DIR$/src/services/QueryService.ts" />
         <option value="$PROJECT_DIR$/src/managers/ProjectsManager.ts" />
+        <option value="$PROJECT_DIR$/src/managers/PhrasesManager.ts" />
+        <option value="$PROJECT_DIR$/src/generated/graphql.schema.ts" />
       </list>
     </option>
   </component>
@@ -254,47 +246,6 @@
               <item name="loca" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="loca" type="b2602c69:ProjectViewProjectNode" />
-              <item name="loca" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="loca" type="b2602c69:ProjectViewProjectNode" />
-              <item name="loca" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="loca" type="b2602c69:ProjectViewProjectNode" />
-              <item name="loca" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="loca" type="b2602c69:ProjectViewProjectNode" />
-              <item name="loca" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="projects" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="loca" type="b2602c69:ProjectViewProjectNode" />
-              <item name="loca" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="table" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="loca" type="b2602c69:ProjectViewProjectNode" />
-              <item name="loca" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="loca" type="b2602c69:ProjectViewProjectNode" />
@@ -408,7 +359,7 @@
       <option name="presentableId" value="Default" />
       <updated>1551891713176</updated>
       <workItem from="1551891714588" duration="27598000" />
-      <workItem from="1552047528388" duration="80848000" />
+      <workItem from="1552047528388" duration="84867000" />
     </task>
     <task id="LOCAL-00001" summary="sd">
       <created>1551980914904</created>
@@ -501,11 +452,25 @@
       <option name="project" value="LOCAL" />
       <updated>1552511938605</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="sd">
+      <created>1552574445877</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1552574445877</updated>
+    </task>
+    <task id="LOCAL-00015" summary="sd">
+      <created>1552585331426</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1552585331426</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108446000" />
+    <option name="totallyTimeSpent" value="112465000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -863,16 +828,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/generated/graphql.schema.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="42" column="13" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/managers/SubscriptionManager.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -964,10 +919,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/generated/graphql.schema.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="1" lean-forward="true" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/managers/PhrasesManager.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="21" column="19" lean-forward="true" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+        <state relative-caret-position="282">
+          <caret line="27" column="34" lean-forward="true" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
         </state>
       </provider>
     </entry>
