@@ -20,7 +20,7 @@ export class ProjectsManager {
       { id: string }
     >({
       query: gql`
-        query($id: ID!) {
+        query($id: UUID!) {
           getProject(id: $id) {
             id
             title
@@ -72,8 +72,8 @@ export class ProjectsManager {
         }
       `,
       variables: {
-        skip: 15,
-        take: 5,
+        skip: 0,
+        take: 10,
         orderBy: ProjectOrderBy.id,
         orderDirection: CommonOrderDirection.DESC,
       },

@@ -22,7 +22,7 @@ export class PhrasesManager {
     >({
       query: gql`
         query(
-          $projectId: ID!
+          $projectId: UUID!
           $skip: Int!
           $take: Int!
           $orderBy: PhraseOrderBy!

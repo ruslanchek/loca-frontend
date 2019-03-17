@@ -1,37 +1,43 @@
 /* tslint:disable */
 export enum CommonOrderDirection {
-  ASC = 'ASC',
-  DESC = 'DESC',
+  ASC = "ASC",
+  DESC = "DESC"
 }
 
 export enum EProjectStatus {
-  Ready = 'Ready',
-  TranslationInProgress = 'TranslationInProgress',
-  Archive = 'Archive',
+  Ready = "Ready",
+  TranslationInProgress = "TranslationInProgress",
+  Archive = "Archive"
 }
 
 export enum EProjectType {
-  WebApplication = 'WebApplication',
-  IOs = 'IOs',
-  Android = 'Android',
-  DesktopApplication = 'DesktopApplication',
-  Promo = 'Promo',
-  WebSite = 'WebSite',
-  Api = 'Api',
-  Other = 'Other',
+  WebApplication = "WebApplication",
+  IOs = "IOs",
+  Android = "Android",
+  DesktopApplication = "DesktopApplication",
+  Promo = "Promo",
+  WebSite = "WebSite",
+  Api = "Api",
+  Other = "Other"
 }
 
 export enum PhraseOrderBy {
-  phraseId = 'phraseId',
-  id = 'id',
+  phraseId = "phraseId",
+  id = "id"
 }
 
 export enum ProjectOrderBy {
-  id = 'id',
+  id = "id"
+}
+
+export enum SearchResultKind {
+  project = "project",
+  phrase = "phrase",
+  translation = "translation"
 }
 
 export class CreatePhraseInput {
-  projectId: number;
+  projectId: UUID;
   phraseId: string;
   tags?: string[];
 }
@@ -41,7 +47,7 @@ export class CreateProjectInput {
 }
 
 export class GetPhrasesInput {
-  projectId: string;
+  projectId: UUID;
   skip: number;
   take: number;
   orderBy: PhraseOrderBy;
@@ -55,24 +61,24 @@ export class GetProjectsInput {
   orderDirection: CommonOrderDirection;
 }
 
-export abstract class IMutation {
-  abstract createPhrase(
-    createPhraseInput?: CreatePhraseInput,
-  ): Phrase | Promise<Phrase>;
+export class SearchInput {
+  string: string;
+}
 
-  abstract createProject(
-    createProjectInput?: CreateProjectInput,
-  ): Project | Promise<Project>;
+export abstract class IMutation {
+  abstract createPhrase(createPhraseInput?: CreatePhraseInput): Phrase | Promise<Phrase>;
+
+  abstract createProject(createProjectInput?: CreateProjectInput): Project | Promise<Project>;
 }
 
 export class Phrase {
-  id: number;
+  id: UUID;
   phraseId: string;
   tags?: string[];
 }
 
 export class Project {
-  id: number;
+  id: UUID;
   title: string;
   description: string;
   type: EProjectType;
@@ -86,19 +92,24 @@ export class Project {
 }
 
 export abstract class IQuery {
-  abstract getPhrases(
-    getPhrasesInput?: GetPhrasesInput,
-  ): Phrase[] | Promise<Phrase[]>;
+  abstract getPhrases(getPhrasesInput?: GetPhrasesInput): Phrase[] | Promise<Phrase[]>;
 
-  abstract getPhrase(id: string): Phrase | Promise<Phrase>;
+  abstract getPhrase(id: UUID): Phrase | Promise<Phrase>;
 
-  abstract getProjects(
-    getProjectsInput?: GetProjectsInput,
-  ): Project[] | Promise<Project[]>;
+  abstract getProjects(getProjectsInput?: GetProjectsInput): Project[] | Promise<Project[]>;
 
-  abstract getProject(id: string): Project | Promise<Project>;
+  abstract getProject(id: UUID): Project | Promise<Project>;
+
+  abstract search(searchInput: SearchInput): SearchResult[] | Promise<SearchResult[]>;
 
   abstract temp__(): boolean | Promise<boolean>;
+}
+
+export class SearchResult {
+  id: UUID;
+  kind: SearchResultKind;
+  title: string;
+  highlights?: string[];
 }
 
 export abstract class ISubscription {
@@ -108,3 +119,4 @@ export abstract class ISubscription {
 }
 
 export type Date = any;
+export type UUID = any;
